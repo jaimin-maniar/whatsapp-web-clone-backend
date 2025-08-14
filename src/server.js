@@ -15,10 +15,12 @@ const allowedOrigins = [
   'https://fluffy-crisp-9667f2.netlify.app'
 ];
 
-// Dynamic CORS middleware
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin) return callback(null, true); // allow non-browser requests (like Postman)
+    if (!origin) {
+      // Allow requests with no origin (Postman, curl, server-to-server)
+      return callback(null, true);
+    }
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     } else {
@@ -27,7 +29,7 @@ app.use(cors({
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
-}));
+}));;
 
 // Connect to DB
 connectDB();
