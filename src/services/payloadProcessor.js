@@ -3,10 +3,8 @@ const { insertMessage, updateStatus } = require('./messageService');
 async function processWebhookPayload(req, res) {
   try {
     const data = req.body;
-    console.log("Data", data)
 
     // Debug log the payload so you can see what's actually arriving
-    console.log("Incoming webhook payload:", JSON.stringify(data, null, 2));
 
     // Safe extraction of entry array
     const entry = data?.metaData?.entry || data?.entry;
